@@ -1,15 +1,18 @@
 wireless = peripheral.wrap('left')
 wired = peripheral.wrap('back')
+--important, channels could already be open before running this program
 wireless.closeAll()
 wired.closeAll()
-wireless.open(rednet.CHANNEL_BROADCAST)
-wired.open(rednet.CHANNEL_BROADCST)
+--listen to everything
+wireless.open(65533)
+wired.open(65533)
 while true do
-	event, side, senderChannel, replyChannel, msg, dist = os.pullEvent('modem_message')
- print(msg)
+	event, side, channel, replyChannel, msg, dist = os.pullEvent('modem_message')
+	print(msg.message)
+	print('from'..replyChannel)
 	if side == 'back' then
-		wireless.transmit(senderChannel, replyChannel, msg)
+		wireless.transmit(65535, replyChannel, msg)
 	elseif side == 'left' then
-		wired.transmit(senderChannel, replyChannel, msg)
+		wired.transmit(65535, replyChannel, msg)
 	end
 end
