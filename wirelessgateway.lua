@@ -4,6 +4,7 @@ wired = peripheral.wrap('back')
 wireless.closeAll()
 wired.closeAll()
 --listen to everything
+--note: this causes sender id to be lost
 wireless.open(65533)
 wired.open(65533)
 while true do
