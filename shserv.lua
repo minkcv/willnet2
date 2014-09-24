@@ -4,5 +4,6 @@ while true do
 	id, line, prot = rednet.receive('rsh')
 	cmd = loadstring(line)
 	setfenv(cmd, _G)
-	cmd()
+	resp = cmd()
+	rednet.send(id, resp, 'rsh')
 end
