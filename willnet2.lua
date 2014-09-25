@@ -28,9 +28,14 @@ while cmd ~= 'exit' do
 			cmd = io.read()
 		end
 	elseif cmd == 'print' then
-		
+		id = rednet.lookup('print','print')
+		print('enter text to print')
+		text = io.read()
+		rednet.send(id,text,'print')
+		id,line,prot = rednet.receive('print')
+		print(line)
 	elseif cmd == 'help' then
-  	print('commands: print, update')
+	  	print('commands: print, update, exit, rsh')
 	end
 	io.write('willnet> ')
 	cmd = io.read()

@@ -1,4 +1,5 @@
 rednet.open('back')
+rednet.host('print','print')
 printer = peripheral.wrap('left')
 while true do
 	id, line, prot = rednet.receive('print')
@@ -11,5 +12,6 @@ while true do
 	else
 		printer.write(line)
 		printer.endPage()
+		rednet.send(id, 'printed','print')
 	end
 end
